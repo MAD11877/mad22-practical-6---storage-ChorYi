@@ -24,16 +24,20 @@ public class ListActivity extends AppCompatActivity {
         // Create a list of 20 User objects
 
         //ArrayList<User> userData = new ArrayList<>();
-        for (int i=0; i<20; i++){
-            Random r = new Random();
-            User ur = new User();
-            ur.name = "Name" + r.nextInt();
-            ur.description = "Description " + Math.abs(r.nextInt());
-            ur.id = i + 1;
-            ur.followed = r.nextBoolean();
+        if (db.getUsers().size() == 0){
+            for (int i=0; i<20; i++){
+                Random r = new Random();
+                User ur = new User();
+                ur.name = "Name" + r.nextInt();
+                ur.description = "Description " + Math.abs(r.nextInt());
+                ur.id = i + 1;
+                ur.followed = r.nextBoolean();
 
-            db.addUser(ur);
+                userData.add(ur);
+                db.addUser(ur);
+            }
         }
+        
         userData = db.getUsers();
 
         RecyclerView rv = findViewById(R.id.recyclerView);
